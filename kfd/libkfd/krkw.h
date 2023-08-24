@@ -233,6 +233,12 @@ void krkw_helper_run_deallocate(struct kfd* kfd, struct krkw* krkw)
     timer_start();
 
     for (u64 id = 0; id < krkw->krkw_allocated_id; id++) {
+        print_message(
+            "deallocate ---> object_id = %llu, id = %llu",
+            krkw->krkw_object_id,
+            id
+        );
+
         if (id == krkw->krkw_object_id) {
             continue;
         }
