@@ -105,6 +105,7 @@ struct dynamic_info {
 
 const struct dynamic_info kern_versions[] = {
     {
+        // iPad 9th Gen (Wi-Fi Only); iOS 16.2
         .kern_version = "Darwin Kernel Version 22.2.0: Mon Nov 28 20:10:54 PST 2022; root:xnu-8792.62.2~1/RELEASE_ARM64_T8030",
         .fileglob__fg_ops = 0x0,
         .fileglob__fg_data = 0x40 - 8,
@@ -170,18 +171,18 @@ const struct dynamic_info kern_versions[] = {
         ._vm_map__holes_list = 0x90 + 0x18,
         ._vm_map__object_size = 0x0,
         .kernelcache__kernel_base = 0xfffffff007004000,
-        .kernelcache__cdevsw = 0xfffffff00a359178,
-        .kernelcache__gPhysBase = 0xfffffff00786fb98,
-        .kernelcache__gPhysSize = 0xfffffff00786fb98 + 8,
-        .kernelcache__gVirtBase = 0xfffffff00786dd78,
-        .kernelcache__perfmon_devices = 0xfffffff00a394370,
-        .kernelcache__perfmon_dev_open = 0xfffffff007ed4bd8,
-        .kernelcache__ptov_table = 0xfffffff007823260,
-        .kernelcache__vm_first_phys_ppnum = 0xfffffff00a393800,
-        .kernelcache__vm_pages = 0xfffffff007820088,
-        .kernelcache__vm_page_array_beginning_addr = 0xfffffff007822210,
-        .kernelcache__vm_page_array_ending_addr = 0xfffffff00a3937f8,
-        .kernelcache__vn_kqfilter = 0xfffffff007f26f14,
+        .kernelcache__cdevsw = 0xfffffff00a29d178,
+        .kernelcache__gPhysBase = 0xfffffff00784bb98,
+        .kernelcache__gPhysSize = 0xfffffff00784bb98 + 8,
+        .kernelcache__gVirtBase = 0xfffffff007849d78,
+        .kernelcache__perfmon_devices = 0xfffffff00a2d8370,
+        .kernelcache__perfmon_dev_open = 0xfffffff007eb4bd8,
+        .kernelcache__ptov_table = 0xfffffff0077ff260,
+        .kernelcache__vm_first_phys_ppnum = 0xfffffff00a2d7800,
+        .kernelcache__vm_pages = 0xfffffff0077fc088,
+        .kernelcache__vm_page_array_beginning_addr = 0xfffffff0077fe210,
+        .kernelcache__vm_page_array_ending_addr = 0xfffffff00a2d77f8,
+        .kernelcache__vn_kqfilter = 0xfffffff007f06f14,
     },
 };
 
