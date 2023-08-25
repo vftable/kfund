@@ -167,6 +167,9 @@ void krkw_helper_run_allocate(struct kfd* kfd, struct krkw* krkw)
     const u64 batch_size = (pages(1) / krkw->krkw_object_size);
 
     while (true) {
+        loop_break:
+            break;
+        
         /*
          * Spray a batch of objects, but stop if the maximum id has been reached.
          */
@@ -203,11 +206,6 @@ void krkw_helper_run_allocate(struct kfd* kfd, struct krkw* krkw)
         }
 
         krkw->krkw_searched_id = krkw->krkw_allocated_id;
-
-        if (maximum_reached) {
-loop_break:
-            break;
-        }
     }
 
     timer_end();
