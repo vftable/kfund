@@ -14,6 +14,8 @@ uint64_t _kfd = 0;
 uint64_t do_kopen(uint64_t puaf_pages, uint64_t puaf_method, uint64_t kread_method, uint64_t kwrite_method)
 {
     _kfd = kopen(puaf_pages, puaf_method, kread_method, kwrite_method);
+    print_success("passed kopen!!!!, kfd = %llu", _kfd);
+    sleep(1);
     return _kfd;
 }
 

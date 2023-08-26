@@ -13,13 +13,13 @@ struct dynamic_info {
     // struct fileops
     u64 fileops__fo_kqfilter;
     // struct fileproc
-    // u64 fileproc__fp_iocount;
-    // u64 fileproc__fp_vflags;
-    // u64 fileproc__fp_flags;
-    // u64 fileproc__fp_guard_attrs;
-    // u64 fileproc__fp_glob;
-    // u64 fileproc__fp_guard;
-    // u64 fileproc__object_size;
+    u64 fileproc__fp_iocount;
+    u64 fileproc__fp_vflags;
+    u64 fileproc__fp_flags;
+    u64 fileproc__fp_guard_attrs;
+    u64 fileproc__fp_glob;
+    u64 fileproc__fp_guard;
+    u64 fileproc__object_size;
     // struct fileproc_guard
     u64 fileproc_guard__fpg_guard;
     // struct kqworkloop
@@ -110,13 +110,13 @@ const struct dynamic_info kern_versions[] = {
         .fileglob__fg_ops = 0x0,
         .fileglob__fg_data = 0x40 - 8,
         .fileops__fo_kqfilter = 0x30,
-        // .fileproc__fp_iocount = 0x0000,
-        // .fileproc__fp_vflags = 0x0004,
-        // .fileproc__fp_flags = 0x0008,
-        // .fileproc__fp_guard_attrs = 0x000a,
-        // .fileproc__fp_glob = 0x0010,
-        // .fileproc__fp_guard = 0x0018,
-        // .fileproc__object_size = 0x0020,
+        .fileproc__fp_iocount = 0x0000,
+        .fileproc__fp_vflags = 0x0004,
+        .fileproc__fp_flags = 0x0008,
+        .fileproc__fp_guard_attrs = 0x000a,
+        .fileproc__fp_glob = 0x0010,
+        .fileproc__fp_guard = 0x0018,
+        .fileproc__object_size = 0x0020,
         .fileproc_guard__fpg_guard = 0x8,
         .kqworkloop__kqwl_state = 0x10,
         .kqworkloop__kqwl_p = 0x18,

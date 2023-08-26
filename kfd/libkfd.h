@@ -180,11 +180,26 @@ u64 kopen(u64 puaf_pages, u64 puaf_method, u64 kread_method, u64 kwrite_method)
     assert(kwrite_method <= kwrite_sem_open);
 
     struct kfd* kfd = kfd_init(puaf_pages, puaf_method, kread_method, kwrite_method);
+    
     puaf_run(kfd);
+    print_success("passed puaf run");
+    sleep(1);
+    
     krkw_run(kfd);
+    print_success("passed krkw run");
+    sleep(1);
+    
     info_run(kfd);
+    print_success("passed info run");
+    sleep(1);
+    
     perf_run(kfd);
+    print_success("passed perf run");
+    sleep(1);
+    
     puaf_cleanup(kfd);
+    print_success("passed puaf cleanup");
+    sleep(1);
 
     timer_end();
     return (u64)(kfd);
