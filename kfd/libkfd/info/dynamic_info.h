@@ -107,7 +107,7 @@ const struct dynamic_info kern_versions[] = {
     {
         // iPad 9th Gen (Wi-Fi Only); iOS 16.2
         .kern_version = "Darwin Kernel Version 22.2.0: Mon Nov 28 20:10:54 PST 2022; root:xnu-8792.62.2~1/RELEASE_ARM64_T8030",
-        .fileglob__fg_ops = 0x0,
+        .fileglob__fg_ops = 0x28,
         .fileglob__fg_data = 0x40 - 8,
         .fileops__fo_kqfilter = 0x30,
         // .fileproc__fp_iocount = 0x0000,
@@ -128,7 +128,7 @@ const struct dynamic_info kern_versions[] = {
         .proc__p_list__le_next = 0x0,
         .proc__p_list__le_prev = 0x8,
         .proc__p_pid = 0x60,
-        .proc__p_fd__fd_ofiles = 0x0,
+        .proc__p_fd__fd_ofiles = 0xf8,
         .proc__object_size = 0x538,
         .pseminfo__psem_usecount = 0x04,
         .pseminfo__psem_uid = 0x0c,

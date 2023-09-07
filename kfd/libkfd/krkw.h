@@ -91,20 +91,9 @@ void krkw_run(struct kfd* kfd)
     timer_start();
     
     krkw_helper_run_allocate(kfd, &kfd->kread);
-    print_message("not crashed yet - kread alloc");
-    sleep(1);
-    
     krkw_helper_run_allocate(kfd, &kfd->kwrite);
-    print_message("not crashed yet - kwrite alloc");
-    sleep(1);
-    
     krkw_helper_run_deallocate(kfd, &kfd->kread);
-    print_message("not crashed yet - kread dealloc");
-    sleep(1);
-    
     krkw_helper_run_deallocate(kfd, &kfd->kwrite);
-    print_message("not crashed yet - kwrite dealloc");
-    sleep(1);
      
     timer_end();
 }
