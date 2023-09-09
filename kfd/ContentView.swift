@@ -105,8 +105,17 @@ struct ContentView: View {
                     
                     Section {
                         List {
-                            ForEach(0 ..< current_directory_entries.count, id: \.self) {
-                                Text(self.current_directory_entries[$0])
+                            ForEach(0 ..< current_directory_entries.count, id: \.self) { entry in
+                                Text(self.current_directory_entries[entry])
+                                    .contentShape(Rectangle())
+                                    .onTapGesture(perform: {
+                                        current_directory_path = current_directory_path + "/" + current_directory_entries[entry]
+                                        let currentDirectoryCString = makeCString(from: current_directory_path)
+                                        let mnt = mountVnode(getVnodeAtPathByChdir(currentDirectoryCString), currentDirectoryCString)
+                                        let dirs = try? FileManager.default.contentsOfDirectory(atPath: String(cString: mnt!))
+                                        
+                                        current_directory_entries = dirs!
+                                    })
                             }
                         }
                     } header: {
