@@ -4,9 +4,18 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    init() {
+func makeCString(from str: String) -> UnsafeMutablePointer<Int8> {
+    let count = str.utf8.count + 1
+    let result = UnsafeMutablePointer<Int8>.allocate(capacity: count)
+    str.withCString { (baseAddress) in
+        // func initialize(from: UnsafePointer<Pointee>, count: Int)
+        result.initialize(from: baseAddress, count: count)
     }
+    return result
+}
+
+struct ContentView: View {
+    init() { }
     
     @State private var kfd: UInt64 = 0
 
@@ -22,6 +31,17 @@ struct ContentView: View {
 
     private var kwrite_method_options = ["dup", "sem_open"]
     @State private var kwrite_method = 1
+    
+    @State private var current_directory_path = "/var"
+    @State private var current_directory_entries = ["(empty)"]
+    
+    func updateDirectoryListing(path str: String) {
+        let currentDirectoryCString = makeCString(from: str)
+        let mnt = mountVnode(getVnodeAtPathByChdir(currentDirectoryCString), currentDirectoryCString)
+        let dirs = try? FileManager.default.contentsOfDirectory(atPath: String(cString: mnt!))
+        
+        current_directory_entries = dirs!
+    }
 
     var body: some View {
         NavigationView {
@@ -60,11 +80,18 @@ struct ContentView: View {
                             puaf_pages = puaf_pages_options[puaf_pages_index]
                             kfd = do_kopen(UInt64(puaf_pages), UInt64(puaf_method), UInt64(kread_method), UInt64(kwrite_method))
                             do_fun()
+                            
+                            let currentDirectoryCString = makeCString(from: current_directory_path)
+                            let mnt = mountVnode(getVnodeAtPathByChdir(currentDirectoryCString), currentDirectoryCString)
+                            let dirs = try? FileManager.default.contentsOfDirectory(atPath: String(cString: mnt!))
+                            
+                            current_directory_entries = dirs!
                         }.disabled(kfd != 0).frame(minWidth: 0, maxWidth: .infinity)
                         Button("kclose") {
                             do_kclose()
                             puaf_pages = 0
                             kfd = 0
+                            current_directory_entries = ["(empty)"]
                         }.disabled(kfd == 0).frame(minWidth: 0, maxWidth: .infinity)
                     }.buttonStyle(.bordered)
                 }.listRowBackground(Color.clear)
@@ -75,6 +102,16 @@ struct ContentView: View {
                             Text("Look at output in Xcode")
                         }.frame(minWidth: 0, maxWidth: .infinity)
                     }.listRowBackground(Color.clear)
+                    
+                    Section {
+                        List {
+                            ForEach(0 ..< current_directory_entries.count, id: \.self) {
+                                Text(self.current_directory_entries[$0])
+                            }
+                        }
+                    } header: {
+                        Text(String(format:"Directory listing of %@", current_directory_path))
+                    }
                 }
             }.navigationBarTitle(Text("kfd"), displayMode: .inline)
         }

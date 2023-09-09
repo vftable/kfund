@@ -18,8 +18,10 @@
 #include <mach/mach.h>
 #include "proc.h"
 #include "vnode.h"
+#include "utils.h"
 #include "grant_full_disk_access.h"
 #include "thanks_opa334dev_htrowii.h"
+
 
 int funUcred(uint64_t proc) {
     uint64_t proc_ro = kread64(proc + off_p_proc_ro);
@@ -161,11 +163,16 @@ uint64_t fun_ipc_entry_lookup(mach_port_name_t port_name) {
     return 0;
 }
 
+char* mountVnode(uint64_t vnode, char* pathname) {
+    NSString *mntPath = [NSString stringWithFormat:@"%@%@%s/.mnt", NSHomeDirectory(), @"/Documents/mount", pathname];
+    NSLog(@"[i] swift pathname: %s", pathname);
+    createFolderAndRedirect(vnode, mntPath);
+    return mntPath.UTF8String;
+}
+
 int do_fun(void) {
     
-    if (!_offsets_init()) {
-        do_kclose();
-    }
+    _offsets_init();
     
     uint64_t kslide = get_kslide();
     uint64_t kbase = 0xfffffff007004000 + kslide;
@@ -180,113 +187,109 @@ int do_fun(void) {
     
     funUcred(selfProc);
     funProc(selfProc);
-    funVnodeHide("/System/Library/Audio/UISounds/photoShutter.caf");
-    funCSFlags("launchd");
-    funTask("kfd");
     
-    //Patch
-    funVnodeChown("/System/Library/PrivateFrameworks/TCC.framework/Support/tccd", 501, 501);
-    //Restore
-    funVnodeChown("/System/Library/PrivateFrameworks/TCC.framework/Support/tccd", 0, 0);
-    
-    
-    //Patch
-    funVnodeChmod("/System/Library/PrivateFrameworks/TCC.framework/Support/tccd", 0107777);
-    //Restore
-    funVnodeChmod("/System/Library/PrivateFrameworks/TCC.framework/Support/tccd", 0100755);
-    
-    mach_port_t host_self = mach_host_self();
-    printf("[i] mach_host_self: 0x%x\n", host_self);
-    fun_ipc_entry_lookup(host_self);
-    
-//    funVnodeOverwrite2("/System/Library/Audio/UISounds/photoShutter.caf", [NSString stringWithFormat:@"%@%@", NSBundle.mainBundle.bundlePath, @"/AAAA.bin"].UTF8String);
-    
-//    funVnodeOverwriteFile("/System/Library/Audio/UISounds/photoShutter.caf", [NSString stringWithFormat:@"%@%@", NSBundle.mainBundle.bundlePath, @"/AAAA.bin"].UTF8String);
-//
-    grant_full_disk_access(^(NSError* error) {
-        NSLog(@"[-] grant_full_disk_access returned error: %@", error);
-    });
-//    patch_installd();
-
-        
-//    Redirect Folders: NSHomeDirectory() + @"/Documents/mounted" -> "/var/mobile/Library/Caches/com.apple.keyboards"
-//    NSString *mntPath = [NSString stringWithFormat:@"%@%@", NSHomeDirectory(), @"/Documents/mounted"];
-//    [[NSFileManager defaultManager] removeItemAtPath:mntPath error:nil];
-//    [[NSFileManager defaultManager] createDirectoryAtPath:mntPath withIntermediateDirectories:NO attributes:nil error:nil];
-//    funVnodeRedirectFolder(mntPath.UTF8String, "/System/Library"); //<- should NOT be work.
-//    funVnodeRedirectFolder(mntPath.UTF8String, "/var/mobile/Library/Caches/com.apple.keyboards"); //<- should be work.
-//    NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:mntPath error:NULL];
-//    NSLog(@"mntPath directory list: %@", dirs);
-    
-#if 0
-    Redirect Folders: NSHomeDirectory() + @"/Documents/mounted" -> /var/mobile
-    funVnodeResearch(mntPath.UTF8String, mntPath.UTF8String);
-    dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:mntPath error:NULL];
-    NSLog(@"[i] /var/mobile dirs: %@", dirs);
-    
-    
-    
-    
-    funVnodeOverwriteFile(mntPath.UTF8String, "/var/mobile/Library/Caches/com.apple.keyboards");
-    [[NSFileManager defaultManager] copyItemAtPath:[NSString stringWithFormat:@"%@%@", NSBundle.mainBundle.bundlePath, @"/AAAA.bin"] toPath:[NSString stringWithFormat:@"%@%@", NSHomeDirectory(), @"/Documents/mounted/images/BBBB.bin"] error:nil];
-    
-    symlink("/System/Library/PrivateFrameworks/TCC.framework/Support/", [NSString stringWithFormat:@"%@%@", NSHomeDirectory(), @"/Documents/Support"].UTF8String);
-    mount("/System/Library/PrivateFrameworks/TCC.framework/Support/", mntPath, NULL, MS_BIND | MS_REC, NULL);
-    printf("mount ret: %d\n", mount("apfs", mntpath, 0, &mntargs))
-    funVnodeChown("/System/Library/PrivateFrameworks/TCC.framework/Support/", 501, 501);
-    funVnodeChmod("/System/Library/PrivateFrameworks/TCC.framework/Support/", 0107777);
-    
-    funVnodeOverwriteFile(mntPath.UTF8String, "/");
-    
-    
-    for(NSString *dir in dirs) {
-        NSString *mydir = [mntPath stringByAppendingString:@"/"];
-        mydir = [mydir stringByAppendingString:dir];
-        int fd_open = open(mydir.UTF8String, O_RDONLY);
-        printf("open %s, ret: %d\n", mydir.UTF8String, fd_open);
-        if(fd_open != -1) {
-            NSArray* dirs2 = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:mydir error:NULL];
-            NSLog(@"/var/%@ directory: %@", dir, dirs2);
+    grant_full_disk_access(^(NSError* _Nullable error) {
+        if (error) {
+            NSLog(@"[!] error: %@", error);
+        } else {
+            NSLog(@"[+] successfully ran grant_full_disk_access");
         }
-        close(fd_open);
-    }
-    printf("open ret: %d\n", open([mntPath stringByAppendingString:@"/mobile/Library"].UTF8String, O_RDONLY));
-    printf("open ret: %d\n", open([mntPath stringByAppendingString:@"/containers"].UTF8String, O_RDONLY));
-    printf("open ret: %d\n", open([mntPath stringByAppendingString:@"/mobile/Library/Preferences"].UTF8String, O_RDONLY));
-    printf("open ret: %d\n", open("/var/containers/Shared/SystemGroup/systemgroup.com.apple.mobilegestaltcache/Library/Caches", O_RDONLY));
+    });
     
-    dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[mntPath stringByAppendingString:@"/mobile"] error:NULL];
-    NSLog(@"/var/mobile directory: %@", dirs);
+    uint64_t target_vnode = getVnodeAtPathByChdir("/var/containers/Bundle/Application");
+    char* target_mount = mountVnode(target_vnode, "/var/containers/Bundle/Application");
     
-    [@"Hello, this is an example file!" writeToFile:[mntPath stringByAppendingString:@"/Hello.txt"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
-    funVnodeOverwriteFile("/System/Library/PrivateFrameworks/TCC.framework/Support/tccd", AAAApath.UTF8String);
-    funVnodeChown("/System/Library/PrivateFrameworks/TCC.framework/Support/tccd", 501, 501);
-    funVnodeOverwriteFile(AAAApath.UTF8String, BBBBpath.UTF8String);
-    funVnodeOverwriteFile("/System/Library/AppPlaceholders/Stocks.app/AppIcon60x60@2x.png", "/System/Library/AppPlaceholders/Tips.app/AppIcon60x60@2x.png");
-    
-    xpc_crasher("com.apple.tccd");
-    xpc_crasher("com.apple.tccd");
-    sleep(10);
-    funUcred(getProc(getPidByName("tccd")));
-    funProc(getProc(getPidByName("tccd")));
-    funVnodeChmod("/System/Library/PrivateFrameworks/TCC.framework/Support/tccd", 0100755);
-    
-    
-    funVnodeOverwrite(AAAApath.UTF8String, AAAApath.UTF8String);
-    
-    funVnodeOverwrite(selfProc, "/System/Library/AppPlaceholders/Stocks.app/AppIcon60x60@2x.png", copyToAppDocs.UTF8String);
-
-
-Overwrite tccd:
-    NSString *copyToAppDocs = [NSString stringWithFormat:@"%@%@", NSHomeDirectory(), @"/Documents/tccd_patched.bin"];
-    remove(copyToAppDocs.UTF8String);
-    [[NSFileManager defaultManager] copyItemAtPath:[NSString stringWithFormat:@"%@%@", NSBundle.mainBundle.bundlePath, @"/tccd_patched.bin"] toPath:copyToAppDocs error:nil];
-    chmod(copyToAppDocs.UTF8String, 0755);
-    funVnodeOverwrite(selfProc, "/System/Library/PrivateFrameworks/TCC.framework/Support/tccd", [copyToAppDocs UTF8String]);
-    
-    xpc_crasher("com.apple.tccd");
-    xpc_crasher("com.apple.tccd");
-#endif
+    NSLog(@"[i] dirs of /var/containers/Bundle/Application: %@", [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[NSString stringWithUTF8String:target_mount] error:NULL]);
     
     return 0;
+}
+
+void do_fun2(char** enabledTweaks, int numTweaks) {
+    // i apologize greatly, this function is one of the worst attrocities known to man with how bad it is written 💀
+    _offsets_init();
+    
+    uint64_t kslide = get_kslide();
+    uint64_t kbase = 0xfffffff007004000 + kslide;
+    printf("[i] Kernel base: 0x%llx\n", kbase);
+    printf("[i] Kernel slide: 0x%llx\n", kslide);
+    uint64_t kheader64 = kread64(kbase);
+    printf("[i] Kernel base kread64 ret: 0x%llx\n", kheader64);
+    
+    pid_t myPid = getpid();
+    uint64_t selfProc = getProc(myPid);
+    printf("[i] self proc: 0x%llx\n", selfProc);
+    
+    funUcred(selfProc);
+    funProc(selfProc);
+    
+    // passcode key stuff
+    // forgive the code below for it is horrendous, i suck at obj c
+    // largely copied from sacrosanct
+    NSString *mntPath = [NSString stringWithFormat:@"%@%@", NSHomeDirectory(), @"/Documents/mounted"];
+    uint64_t var_tmp_vnode = getVnodeAtPathByChdir("/var/tmp");
+    printf("[i] /var/tmp vnode: 0x%llx\n", var_tmp_vnode);
+    
+    // symlink documents folder to /var/tmp, then copy all our images there
+    uint64_t orig_to_v_data = createFolderAndRedirect(var_tmp_vnode, mntPath);
+    
+    NSError *error;
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *folderPath = [documentsDirectory stringByAppendingPathComponent:@"ChangingPasscodeKeys"];
+    
+    // This was an attempt to clean up the horrible code below
+    // Unfortunately, it does not work and I cannot figure out why
+    NSDictionary *keyMapping = @{
+        @"0": @"",
+        @"1": @"",
+        @"2": @"A B C",
+        @"3": @"D E F",
+        @"4": @"G H I",
+        @"5": @"J K L",
+        @"6": @"M N O",
+        @"7": @"P Q R S",
+        @"8": @"T U V",
+        @"9": @"W X Y Z"
+    };
+
+    for (int i = 0; i < numTweaks; i++) {
+        char *tweak = enabledTweaks[i];
+        NSString *letters = keyMapping[@(tweak)];
+
+        if (letters) {
+            NSString *filePath = [folderPath stringByAppendingFormat:@"/PasscodeKey-%s.png", tweak];
+
+            [[NSFileManager defaultManager] copyItemAtPath:[NSString stringWithFormat:@"%@", filePath] toPath:[mntPath stringByAppendingFormat:@"/en-%s-%@--white.png", tweak, letters] error:&error];
+        }
+    }
+
+    NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:mntPath error:NULL];
+    NSLog(@"/var/tmp directory list:\n %@", dirs);
+    printf("unredirecting from tmp\n");
+    UnRedirectAndRemoveFolder(orig_to_v_data, mntPath);
+
+    uint64_t telephonyui_vnode = getVnodeAtPathByChdir("/var/mobile/Library/Caches/TelephonyUI-9");
+    printf("[i] /var/mobile/Library/Caches/TelephonyUI-9 vnode: 0x%llx\n", telephonyui_vnode);
+
+    //2. Create symbolic link /var/tmp/image.png -> /var/mobile/Library/Caches/TelephonyUI-9/en-number-letters--white.png, loop through then done. Technically just add our known image paths in /var/tmp (they can be anything, just 1.png also works) into an array then loop through both that array and this directory to automate it
+    orig_to_v_data = createFolderAndRedirect(telephonyui_vnode, mntPath);
+    for (int i = 0; i < numTweaks; i++) {
+        char *tweak = enabledTweaks[i];
+        NSString *letters = keyMapping[@(tweak)];
+        if (letters) {
+            // Remove symlink
+            NSString *tmpPath = [NSString stringWithFormat:@"/var/tmp/en-%s-%@--white.png", tweak, letters];
+            unlink(tmpPath.UTF8String);
+            // Remove and symlink
+            printf("remove ret: %d\n", [[NSFileManager defaultManager] removeItemAtPath:[mntPath stringByAppendingFormat:@"/en-%s-%@--white.png", tweak, letters] error:nil]);
+            printf("symlink ret: %d, errno: %d\n", symlink(tmpPath.UTF8String, [mntPath stringByAppendingFormat:@"/en-%s-%@--white.png", tweak, letters].UTF8String), errno);
+        }
+    }
+    
+    dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:mntPath error:NULL];
+    NSLog(@"/var/mobile/Library/Caches/TelephonyUI-9 directory list:\n %@", dirs);
+
+    printf("cleaning up\n");
+    UnRedirectAndRemoveFolder(orig_to_v_data, mntPath);
 }

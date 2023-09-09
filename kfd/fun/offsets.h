@@ -6,7 +6,7 @@
 //
 
 #include <stdio.h>
-#include <stdbool.h>
+#include <stdint.h>
 
 extern uint32_t off_p_list_le_prev;
 extern uint32_t off_p_proc_ro;
@@ -43,9 +43,11 @@ extern uint32_t off_cr_gmuid;
 extern uint32_t off_cr_flags;
 extern uint32_t off_task_t_flags;
 extern uint32_t off_fd_ofiles;
+extern uint32_t off_fd_cdir;
 extern uint32_t off_fp_glob;
 extern uint32_t off_fg_data;
 extern uint32_t off_fg_flag;
+extern uint32_t off_vnode_v_ncchildren_tqh_first;
 extern uint32_t off_vnode_v_iocount;
 extern uint32_t off_vnode_v_usecount;
 extern uint32_t off_vnode_v_flag;
@@ -65,5 +67,15 @@ extern uint32_t off_mount_mnt_fsgroup;
 extern uint32_t off_mount_mnt_devvp;
 extern uint32_t off_mount_mnt_flag;
 extern uint32_t off_specinfo_si_flags;
+extern uint32_t off_namecache_nc_vp;
+extern uint32_t off_namecache_nc_child_tqe_prev;
 
-bool _offsets_init(void);
+//uint32_t off_p_pfd = 0xf8;
+//uint32_t off_fd_ofiles = 0;
+//uint32_t off_fp_fglob = 0x10;
+//uint32_t off_fg_data = 0x38;
+//uint32_t off_vnode_iocount = 0x64;
+//uint32_t off_vnode_usecount = 0x60;
+//uint32_t off_vnode_vflags = 0x54;
+
+void _offsets_init(void);
