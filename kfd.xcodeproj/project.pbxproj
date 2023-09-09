@@ -21,11 +21,11 @@
 		CE3A75442AAA63DE000AA43E /* utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A75432AAA63DE000AA43E /* utils.m */; };
 		CE3A75472AAA6428000AA43E /* vm_unaligned_copy_switch_race.c in Sources */ = {isa = PBXBuildFile; fileRef = CE3A75462AAA6428000AA43E /* vm_unaligned_copy_switch_race.c */; };
 		CE3A75492AAA6484000AA43E /* vnode.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A75482AAA6484000AA43E /* vnode.m */; };
+		CE9058572AAC7D0D002BEE55 /* libkfd in Resources */ = {isa = PBXBuildFile; fileRef = CE9058562AAC7D0D002BEE55 /* libkfd */; };
+		CE90585A2AAC7FD7002BEE55 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9058592AAC7FD7002BEE55 /* IOKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		212762AC2A7573CB0070E6A5 /* static_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = static_info.h; sourceTree = "<group>"; };
-		212762AD2A7573CB0070E6A5 /* dynamic_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dynamic_info.h; sourceTree = "<group>"; };
 		212762AF2A7574040070E6A5 /* thanks_opa334dev_htrowii.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thanks_opa334dev_htrowii.h; sourceTree = "<group>"; };
 		212762B02A7574040070E6A5 /* vnode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vnode.h; sourceTree = "<group>"; };
 		212762B12A7574040070E6A5 /* proc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = proc.h; sourceTree = "<group>"; };
@@ -41,15 +41,6 @@
 		212762BC2A7574040070E6A5 /* fun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fun.h; sourceTree = "<group>"; };
 		212762BD2A7574040070E6A5 /* helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = helpers.h; sourceTree = "<group>"; };
 		212762BE2A7574040070E6A5 /* grant_full_disk_access.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = grant_full_disk_access.h; sourceTree = "<group>"; };
-		2948BA6E2A3162FD00B2ED3C /* common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
-		2948BA6F2A31630800B2ED3C /* info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = info.h; sourceTree = "<group>"; };
-		2948BA702A31631000B2ED3C /* krkw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = krkw.h; sourceTree = "<group>"; };
-		2948BA712A31631C00B2ED3C /* puaf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = puaf.h; sourceTree = "<group>"; };
-		2948BA722A31636600B2ED3C /* physpuppet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = physpuppet.h; sourceTree = "<group>"; };
-		2948BA762A3163AB00B2ED3C /* kread_kqueue_workloop_ctl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = kread_kqueue_workloop_ctl.h; sourceTree = "<group>"; };
-		2948BA772A3163B900B2ED3C /* kread_sem_open.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = kread_sem_open.h; sourceTree = "<group>"; };
-		2948BA782A3163C500B2ED3C /* kwrite_dup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = kwrite_dup.h; sourceTree = "<group>"; };
-		2948BA792A3163D200B2ED3C /* kwrite_sem_open.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = kwrite_sem_open.h; sourceTree = "<group>"; };
 		2965065D2A31565B0025D1A7 /* kfd-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "kfd-Bridging-Header.h"; sourceTree = "<group>"; };
 		2965065E2A31565B0025D1A7 /* libkfd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libkfd.h; sourceTree = "<group>"; };
 		297BA1052A310AE100D1E51A /* kfd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kfd.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,13 +49,13 @@
 		297BA10C2A310AE200D1E51A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		297BA10E2A310AE200D1E51A /* kfd.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = kfd.entitlements; sourceTree = "<group>"; };
 		297BA1102A310AE200D1E51A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		29A358F32A43B53300C297A1 /* smith.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = smith.h; sourceTree = "<group>"; };
-		29A765292A393FCB006617E8 /* perf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = perf.h; sourceTree = "<group>"; };
 		CE3A75422AAA63C6000AA43E /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		CE3A75432AAA63DE000AA43E /* utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = utils.m; sourceTree = "<group>"; };
 		CE3A75452AAA6404000AA43E /* vm_unaligned_copy_switch_race.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vm_unaligned_copy_switch_race.h; sourceTree = "<group>"; };
 		CE3A75462AAA6428000AA43E /* vm_unaligned_copy_switch_race.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_unaligned_copy_switch_race.c; sourceTree = "<group>"; };
 		CE3A75482AAA6484000AA43E /* vnode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = vnode.m; sourceTree = "<group>"; };
+		CE9058562AAC7D0D002BEE55 /* libkfd */ = {isa = PBXFileReference; lastKnownFileType = folder; name = libkfd; path = ../../kfd/kfd/libkfd; sourceTree = "<group>"; };
+		CE9058592AAC7FD7002BEE55 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,21 +63,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE90585A2AAC7FD7002BEE55 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		212762AB2A7573CB0070E6A5 /* info */ = {
-			isa = PBXGroup;
-			children = (
-				212762AC2A7573CB0070E6A5 /* static_info.h */,
-				212762AD2A7573CB0070E6A5 /* dynamic_info.h */,
-			);
-			path = info;
-			sourceTree = "<group>";
-		};
 		212762AE2A7574040070E6A5 /* fun */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,62 +97,12 @@
 			path = fun;
 			sourceTree = "<group>";
 		};
-		2948BA6A2A3162C600B2ED3C /* libkfd */ = {
-			isa = PBXGroup;
-			children = (
-				2948BA6E2A3162FD00B2ED3C /* common.h */,
-				2948BA6F2A31630800B2ED3C /* info.h */,
-				212762AB2A7573CB0070E6A5 /* info */,
-				2948BA6C2A3162E400B2ED3C /* krkw */,
-				2948BA702A31631000B2ED3C /* krkw.h */,
-				29A765292A393FCB006617E8 /* perf.h */,
-				2948BA6D2A3162E900B2ED3C /* puaf */,
-				2948BA712A31631C00B2ED3C /* puaf.h */,
-			);
-			path = libkfd;
-			sourceTree = "<group>";
-		};
-		2948BA6C2A3162E400B2ED3C /* krkw */ = {
-			isa = PBXGroup;
-			children = (
-				2948BA742A31639800B2ED3C /* kread */,
-				2948BA752A31639D00B2ED3C /* kwrite */,
-			);
-			path = krkw;
-			sourceTree = "<group>";
-		};
-		2948BA6D2A3162E900B2ED3C /* puaf */ = {
-			isa = PBXGroup;
-			children = (
-				2948BA722A31636600B2ED3C /* physpuppet.h */,
-				29A358F32A43B53300C297A1 /* smith.h */,
-			);
-			path = puaf;
-			sourceTree = "<group>";
-		};
-		2948BA742A31639800B2ED3C /* kread */ = {
-			isa = PBXGroup;
-			children = (
-				2948BA762A3163AB00B2ED3C /* kread_kqueue_workloop_ctl.h */,
-				2948BA772A3163B900B2ED3C /* kread_sem_open.h */,
-			);
-			path = kread;
-			sourceTree = "<group>";
-		};
-		2948BA752A31639D00B2ED3C /* kwrite */ = {
-			isa = PBXGroup;
-			children = (
-				2948BA782A3163C500B2ED3C /* kwrite_dup.h */,
-				2948BA792A3163D200B2ED3C /* kwrite_sem_open.h */,
-			);
-			path = kwrite;
-			sourceTree = "<group>";
-		};
 		297BA0FC2A310AE100D1E51A = {
 			isa = PBXGroup;
 			children = (
 				297BA1072A310AE100D1E51A /* kfd */,
 				297BA1062A310AE100D1E51A /* Products */,
+				CE9058582AAC7FD7002BEE55 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -190,8 +123,8 @@
 				297BA10E2A310AE200D1E51A /* kfd.entitlements */,
 				297BA1082A310AE100D1E51A /* kfdApp.swift */,
 				212762AE2A7574040070E6A5 /* fun */,
-				2948BA6A2A3162C600B2ED3C /* libkfd */,
 				2965065E2A31565B0025D1A7 /* libkfd.h */,
+				CE9058562AAC7D0D002BEE55 /* libkfd */,
 				297BA10F2A310AE200D1E51A /* Preview Content */,
 			);
 			path = kfd;
@@ -203,6 +136,14 @@
 				297BA1102A310AE200D1E51A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CE9058582AAC7FD7002BEE55 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE9058592AAC7FD7002BEE55 /* IOKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +206,7 @@
 			files = (
 				297BA1112A310AE200D1E51A /* Preview Assets.xcassets in Resources */,
 				297BA10D2A310AE200D1E51A /* Assets.xcassets in Resources */,
+				CE9058572AAC7D0D002BEE55 /* libkfd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

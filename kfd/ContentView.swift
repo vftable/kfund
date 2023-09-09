@@ -26,10 +26,10 @@ struct ContentView: View {
     private var puaf_method_options = ["physpuppet", "smith"]
     @State private var puaf_method = 1
 
-    private var kread_method_options = ["kqueue_workloop_ctl", "sem_open"]
+    private var kread_method_options = ["kqueue_workloop_ctl", "sem_open", "IOSurface"]
     @State private var kread_method = 1
 
-    private var kwrite_method_options = ["dup", "sem_open"]
+    private var kwrite_method_options = ["dup", "sem_open", "IOSurface"]
     @State private var kwrite_method = 1
     
     @State private var current_directory_path = "/var"

