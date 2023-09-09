@@ -32,15 +32,30 @@ struct ContentView: View {
     private var kwrite_method_options = ["dup", "sem_open"]
     @State private var kwrite_method = 1
     
+    private var base_path = "/var"
     @State private var current_directory_path = "/var"
+    @State private var real_directory_mount_path = ""
     @State private var current_directory_entries = ["(empty)"]
     
-    func updateDirectoryListing(path str: String) {
-        let currentDirectoryCString = makeCString(from: str)
-        let mnt = mountVnode(getVnodeAtPathByChdir(currentDirectoryCString), currentDirectoryCString)
-        let dirs = try? FileManager.default.contentsOfDirectory(atPath: String(cString: mnt!))
-        
-        current_directory_entries = dirs!
+    func updateDirectoryListing(pathname: String) {
+        if (pathname.starts(with: base_path)) {
+            current_directory_path = pathname
+            
+            var isDirectory: ObjCBool = true
+            if (FileManager.default.fileExists(atPath: real_directory_mount_path + pathname.replacingOccurrences(of: base_path, with: "", options: .literal, range: pathname.range(of: base_path) ?? pathname.startIndex..<pathname.endIndex), isDirectory: &isDirectory)) {
+                if (isDirectory.boolValue) {
+                    let currentDirectoryCString = makeCString(from: current_directory_path)
+                    let mnt = mountVnode(getVnodeAtPathByChdir(currentDirectoryCString), currentDirectoryCString)
+                    let dirs = try? FileManager.default.contentsOfDirectory(atPath: String(cString: mnt!))
+                    
+                    current_directory_entries = [".."] + dirs!
+                }
+            } else {
+                current_directory_entries = ["..", "(empty)"]
+            }
+        } else {
+            current_directory_entries = ["..", "(empty)"]
+        }
     }
 
     var body: some View {
@@ -81,11 +96,12 @@ struct ContentView: View {
                             kfd = do_kopen(UInt64(puaf_pages), UInt64(puaf_method), UInt64(kread_method), UInt64(kwrite_method))
                             do_fun()
                             
-                            let currentDirectoryCString = makeCString(from: current_directory_path)
-                            let mnt = mountVnode(getVnodeAtPathByChdir(currentDirectoryCString), currentDirectoryCString)
+                            let basePathCString = makeCString(from: base_path)
+                            let mnt = mountVnode(getVnodeAtPathByChdir(basePathCString), basePathCString)
                             let dirs = try? FileManager.default.contentsOfDirectory(atPath: String(cString: mnt!))
                             
-                            current_directory_entries = dirs!
+                            real_directory_mount_path = String(cString: mnt!)
+                            current_directory_entries = [".."] + dirs!
                         }.disabled(kfd != 0).frame(minWidth: 0, maxWidth: .infinity)
                         Button("kclose") {
                             do_kclose()
@@ -109,12 +125,12 @@ struct ContentView: View {
                                 Text(self.current_directory_entries[entry])
                                     .contentShape(Rectangle())
                                     .onTapGesture(perform: {
-                                        current_directory_path = current_directory_path + "/" + current_directory_entries[entry]
-                                        let currentDirectoryCString = makeCString(from: current_directory_path)
-                                        let mnt = mountVnode(getVnodeAtPathByChdir(currentDirectoryCString), currentDirectoryCString)
-                                        let dirs = try? FileManager.default.contentsOfDirectory(atPath: String(cString: mnt!))
-                                        
-                                        current_directory_entries = dirs!
+                                        let pathname = current_directory_entries[entry]
+                                        if (pathname == "..") {
+                                            updateDirectoryListing(pathname: current_directory_path.prefix(upTo: current_directory_path.lastIndex(of: "/") ?? current_directory_path.endIndex).description)
+                                        } else if (pathname == "(empty)") {} else {
+                                            updateDirectoryListing(pathname: current_directory_path + "/" + pathname)
+                                        }
                                     })
                             }
                         }

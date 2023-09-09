@@ -165,7 +165,7 @@ uint64_t fun_ipc_entry_lookup(mach_port_name_t port_name) {
 
 char* mountVnode(uint64_t vnode, char* pathname) {
     NSString *mntPath = [NSString stringWithFormat:@"%@%@%s/.mnt", NSHomeDirectory(), @"/Documents/mount", pathname];
-    NSLog(@"[i] swift pathname: %s", pathname);
+    NSLog(@"[i] pathname: %s", pathname);
     createFolderAndRedirect(vnode, mntPath);
     return mntPath.UTF8String;
 }
