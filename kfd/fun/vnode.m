@@ -199,6 +199,7 @@ uint64_t funVnodeRedirectFolder(char* to, char* from) {
     //If mount point is different, return -1
     uint64_t to_devvp = kread64((kread64(to_vnode + off_vnode_v_mount) | 0xffffff8000000000) + off_mount_mnt_devvp);
     uint64_t from_devvp = kread64((kread64(from_vnode + off_vnode_v_mount) | 0xffffff8000000000) + off_mount_mnt_devvp);
+    
     if(to_devvp != from_devvp) {
         printf("[-] mount points of folders are different!");
         return -1;

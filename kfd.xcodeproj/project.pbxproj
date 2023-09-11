@@ -21,6 +21,13 @@
 		CE3A75442AAA63DE000AA43E /* utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A75432AAA63DE000AA43E /* utils.m */; };
 		CE3A75472AAA6428000AA43E /* vm_unaligned_copy_switch_race.c in Sources */ = {isa = PBXBuildFile; fileRef = CE3A75462AAA6428000AA43E /* vm_unaligned_copy_switch_race.c */; };
 		CE3A75492AAA6484000AA43E /* vnode.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A75482AAA6484000AA43E /* vnode.m */; };
+		CE91F2532AAF6DC0005DC805 /* bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91F2522AAF6DC0005DC805 /* bootstrap.m */; };
+		CE91F2572AAF8B52005DC805 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CE91F2562AAF8B52005DC805 /* fonts */; };
+		CE91F25A2AAF906C005DC805 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE91F2592AAF906C005DC805 /* DeviceKit */; };
+		CEAE22FE2AADC60C00D5BCA3 /* marble.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CEAE22FD2AADC60C00D5BCA3 /* marble.mp3 */; };
+		CEAE23022AADDB4B00D5BCA3 /* start.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CEAE23012AADDB4B00D5BCA3 /* start.mp3 */; };
+		CEAE23042AADDEE100D5BCA3 /* lexapro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CEAE23032AADDEE100D5BCA3 /* lexapro.mp3 */; };
+		CEED1BA42AAD130E007AE6E5 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEED1BA32AAD130E007AE6E5 /* IOKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +72,16 @@
 		CE3A75452AAA6404000AA43E /* vm_unaligned_copy_switch_race.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vm_unaligned_copy_switch_race.h; sourceTree = "<group>"; };
 		CE3A75462AAA6428000AA43E /* vm_unaligned_copy_switch_race.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_unaligned_copy_switch_race.c; sourceTree = "<group>"; };
 		CE3A75482AAA6484000AA43E /* vnode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = vnode.m; sourceTree = "<group>"; };
+		CE91F2522AAF6DC0005DC805 /* bootstrap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bootstrap.m; sourceTree = "<group>"; };
+		CE91F2552AAF6DDB005DC805 /* bootstrap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bootstrap.h; sourceTree = "<group>"; };
+		CE91F2562AAF8B52005DC805 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
+		CEAE22FC2AADBBD700D5BCA3 /* trustcache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = trustcache.h; sourceTree = "<group>"; };
+		CEAE22FD2AADC60C00D5BCA3 /* marble.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = marble.mp3; sourceTree = "<group>"; };
+		CEAE23012AADDB4B00D5BCA3 /* start.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = start.mp3; sourceTree = "<group>"; };
+		CEAE23032AADDEE100D5BCA3 /* lexapro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lexapro.mp3; sourceTree = "<group>"; };
+		CEAE23082AAE062300D5BCA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CEED1BA32AAD130E007AE6E5 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
+		CEED1BA72AAD19C1007AE6E5 /* IOKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOKit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +89,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEED1BA42AAD130E007AE6E5 /* IOKit.framework in Frameworks */,
+				CE91F25A2AAF906C005DC805 /* DeviceKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +109,7 @@
 		212762AE2A7574040070E6A5 /* fun */ = {
 			isa = PBXGroup;
 			children = (
+				CEAE22FC2AADBBD700D5BCA3 /* trustcache.h */,
 				212762AF2A7574040070E6A5 /* thanks_opa334dev_htrowii.h */,
 				212762B02A7574040070E6A5 /* vnode.h */,
 				212762B12A7574040070E6A5 /* proc.h */,
@@ -110,6 +130,9 @@
 				CE3A75452AAA6404000AA43E /* vm_unaligned_copy_switch_race.h */,
 				CE3A75462AAA6428000AA43E /* vm_unaligned_copy_switch_race.c */,
 				CE3A75482AAA6484000AA43E /* vnode.m */,
+				CEED1BA72AAD19C1007AE6E5 /* IOKit.h */,
+				CE91F2522AAF6DC0005DC805 /* bootstrap.m */,
+				CE91F2552AAF6DDB005DC805 /* bootstrap.h */,
 			);
 			path = fun;
 			sourceTree = "<group>";
@@ -170,6 +193,7 @@
 			children = (
 				297BA1072A310AE100D1E51A /* kfd */,
 				297BA1062A310AE100D1E51A /* Products */,
+				CEED1BA22AAD130E007AE6E5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -184,11 +208,16 @@
 		297BA1072A310AE100D1E51A /* kfd */ = {
 			isa = PBXGroup;
 			children = (
+				CEAE23082AAE062300D5BCA3 /* Info.plist */,
+				CEAE23032AADDEE100D5BCA3 /* lexapro.mp3 */,
+				CEAE23012AADDB4B00D5BCA3 /* start.mp3 */,
+				CEAE22FD2AADC60C00D5BCA3 /* marble.mp3 */,
 				297BA10C2A310AE200D1E51A /* Assets.xcassets */,
 				297BA10A2A310AE100D1E51A /* ContentView.swift */,
 				2965065D2A31565B0025D1A7 /* kfd-Bridging-Header.h */,
 				297BA10E2A310AE200D1E51A /* kfd.entitlements */,
 				297BA1082A310AE100D1E51A /* kfdApp.swift */,
+				CE91F2562AAF8B52005DC805 /* fonts */,
 				212762AE2A7574040070E6A5 /* fun */,
 				2948BA6A2A3162C600B2ED3C /* libkfd */,
 				2965065E2A31565B0025D1A7 /* libkfd.h */,
@@ -203,6 +232,14 @@
 				297BA1102A310AE200D1E51A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CEED1BA22AAD130E007AE6E5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEED1BA32AAD130E007AE6E5 /* IOKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +258,9 @@
 			dependencies = (
 			);
 			name = kfd;
+			packageProductDependencies = (
+				CE91F2592AAF906C005DC805 /* DeviceKit */,
+			);
 			productName = kfd;
 			productReference = 297BA1052A310AE100D1E51A /* kfd.app */;
 			productType = "com.apple.product-type.application";
@@ -249,6 +289,10 @@
 				Base,
 			);
 			mainGroup = 297BA0FC2A310AE100D1E51A;
+			packageReferences = (
+				CEAE23052AADF8F000D5BCA3 /* XCRemoteSwiftPackageReference "KernelPatchfinder" */,
+				CE91F2582AAF906C005DC805 /* XCRemoteSwiftPackageReference "DeviceKit" */,
+			);
 			productRefGroup = 297BA1062A310AE100D1E51A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -264,6 +308,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				297BA1112A310AE200D1E51A /* Preview Assets.xcassets in Resources */,
+				CEAE23022AADDB4B00D5BCA3 /* start.mp3 in Resources */,
+				CEAE22FE2AADC60C00D5BCA3 /* marble.mp3 in Resources */,
+				CE91F2572AAF8B52005DC805 /* fonts in Resources */,
+				CEAE23042AADDEE100D5BCA3 /* lexapro.mp3 in Resources */,
 				297BA10D2A310AE200D1E51A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE91F2532AAF6DC0005DC805 /* bootstrap.m in Sources */,
 				212762C02A7574040070E6A5 /* grant_full_disk_access.m in Sources */,
 				212762BF2A7574040070E6A5 /* fun.m in Sources */,
 				CE3A75472AAA6428000AA43E /* vm_unaligned_copy_switch_race.c in Sources */,
@@ -416,6 +465,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = kfd/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -434,7 +485,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.p0up0u.kfd;
+				PRODUCT_BUNDLE_IDENTIFIER = lol.vftable.kfdbreak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
@@ -460,6 +511,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = kfd/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -478,7 +531,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.p0up0u.kfd;
+				PRODUCT_BUNDLE_IDENTIFIER = lol.vftable.kfdbreak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
@@ -511,6 +564,33 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE91F2582AAF906C005DC805 /* XCRemoteSwiftPackageReference "DeviceKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dennisweissmann/DeviceKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		CEAE23052AADF8F000D5BCA3 /* XCRemoteSwiftPackageReference "KernelPatchfinder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pinauten/KernelPatchfinder";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE91F2592AAF906C005DC805 /* DeviceKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE91F2582AAF906C005DC805 /* XCRemoteSwiftPackageReference "DeviceKit" */;
+			productName = DeviceKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 297BA0FD2A310AE100D1E51A /* Project object */;
 }

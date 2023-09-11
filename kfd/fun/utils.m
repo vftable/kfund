@@ -19,8 +19,9 @@
 #import "utils.h"
 
 uint64_t createFolderAndRedirect(uint64_t vnode, NSString *mntPath) {
-    [[NSFileManager defaultManager] removeItemAtPath:mntPath error:nil];
-    [[NSFileManager defaultManager] createDirectoryAtPath:mntPath withIntermediateDirectories:YES attributes:nil error:nil];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:mntPath]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:mntPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
     uint64_t orig_to_v_data = funVnodeRedirectFolderFromVnode(mntPath.UTF8String, vnode);
     return orig_to_v_data;
 }

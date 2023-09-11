@@ -56,6 +56,35 @@ void kreadbuf(uint64_t kaddr, void* output, size_t size)
     }
 }
 
+void kwritebuf(uint64_t kaddr, void* input, size_t size)
+{
+    uint64_t endAddr = kaddr + size;
+    uint32_t inputOffset = 0;
+    unsigned char* inputBytes = (unsigned char*)input;
+    
+    for(uint64_t curAddr = kaddr; curAddr < endAddr; curAddr += 4)
+    {
+        uint32_t toWrite = 0;
+        int bc = 4;
+        
+        uint64_t remainingBytes = endAddr - curAddr;
+        if(remainingBytes < 4)
+        {
+            toWrite = kread32(curAddr);
+            bc = (int)remainingBytes;
+        }
+        
+        unsigned char* wb = (unsigned char*)&toWrite;
+        for(int i = 0; i < bc; i++)
+        {
+            wb[i] = inputBytes[inputOffset];
+            inputOffset++;
+        }
+
+        kwrite32(curAddr, toWrite);
+    }
+}
+
 uint64_t vm_map_get_header(uint64_t vm_map_ptr)
 {
     return vm_map_ptr + 0x10;

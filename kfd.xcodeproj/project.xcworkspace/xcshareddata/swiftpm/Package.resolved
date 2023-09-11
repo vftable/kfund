@@ -1,0 +1,52 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "DeviceKit",
+        "repositoryURL": "https://github.com/dennisweissmann/DeviceKit.git",
+        "state": {
+          "branch": null,
+          "revision": "691fe8112cca20ebf0020a1709d4e0205400311c",
+          "version": "5.0.0"
+        }
+      },
+      {
+        "package": "KernelPatchfinder",
+        "repositoryURL": "https://github.com/pinauten/KernelPatchfinder",
+        "state": {
+          "branch": "master",
+          "revision": "c7098c75e8b3b78e12df89f2f3ddb5e5102c680f",
+          "version": null
+        }
+      },
+      {
+        "package": "PatchfinderUtils",
+        "repositoryURL": "https://github.com/pinauten/PatchfinderUtils",
+        "state": {
+          "branch": "master",
+          "revision": "68f6e7f430d94bc01315b0f1e753e3764b9cc31d",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftMachO",
+        "repositoryURL": "https://github.com/pinauten/SwiftMachO",
+        "state": {
+          "branch": "master",
+          "revision": "7bcffb07259191f7103ded3d29c77f05b7fed396",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftUtils",
+        "repositoryURL": "https://github.com/pinauten/SwiftUtils",
+        "state": {
+          "branch": "master",
+          "revision": "1d37faabb4c58b3152394c9b6e1c1a68507646b9",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

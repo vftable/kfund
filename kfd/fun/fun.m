@@ -21,6 +21,7 @@
 #include "utils.h"
 #include "grant_full_disk_access.h"
 #include "thanks_opa334dev_htrowii.h"
+#include "IOKit.h"
 
 
 int funUcred(uint64_t proc) {
@@ -170,6 +171,21 @@ char* mountVnode(uint64_t vnode, char* pathname) {
     return mntPath.UTF8String;
 }
 
+uint64_t getChildVnode(uint64_t vnode, char* childname) {
+    uint64_t target_vnode = 0;
+    int trycount = 0;
+    
+    while(1) {
+        if (target_vnode != 0)
+            break;
+        
+        target_vnode = findChildVnodeByVnode(vnode, childname);
+        trycount++;
+    }
+    
+    return target_vnode;
+}
+
 int do_fun(void) {
     
     _offsets_init();
@@ -196,10 +212,21 @@ int do_fun(void) {
         }
     });
     
-    uint64_t target_vnode = getVnodeAtPathByChdir("/var/containers/Bundle/Application");
-    char* target_mount = mountVnode(target_vnode, "/var/containers/Bundle/Application");
+    /*
     
-    NSLog(@"[i] dirs of /var/containers/Bundle/Application: %@", [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[NSString stringWithUTF8String:target_mount] error:NULL]);
+    uint64_t target_vnode = getChildVnode(getVnodeVar(), "root");
+    char* target_mount = mountVnode(target_vnode, "/var/root");
+    
+    NSLog(@"[i] directory listing of /var/root: %@", [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[NSString stringWithUTF8String:target_mount] error:NULL]);
+     
+     */
+    
+    uint64_t target_vnode = getVnodeAtPathByChdir("/var/mobile");
+    char* target_mount = mountVnode(target_vnode, "/var/mobile");
+    
+    NSLog(@"[i] directory listing of /var/mobile: %@", [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[NSString stringWithUTF8String:target_mount] error:NULL]);
+    
+    // VarMobileWriteTest();
     
     return 0;
 }
