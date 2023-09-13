@@ -72,8 +72,6 @@ struct kfdApp: App {
                 printOutput(string: "[*] software version: \(device.systemName ?? "iOS") \(device.systemVersion ?? "16.1.2")")
                 printOutput(string: "[*] kernel version: \(getKernelVersion() ?? "unknown")")
                 
-                printOutput(string: "") // newline:fr:
-                
                 requestNotificationAuthorization()
                 UNUserNotificationCenter.current().getNotificationSettings { settings in
                     if settings.authorizationStatus == .authorized {

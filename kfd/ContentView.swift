@@ -22,6 +22,15 @@ struct ContentView: View {
     
     @State private var kfd: UInt64 = 0
     @State private var kernel_slide: UInt64 = 0
+    
+    private var package_manager_options = ["Sileo", "Zebra", "Saily", "Cydia"]
+    @State private var package_manager_index = 0
+    
+    private var tweak_injector_options = ["opainject", "Substrate", "libhooker"]
+    @State private var tweak_injector_index = 0
+    
+    @State private var reinstall_bootstrap = false
+    @State private var reinstall_basebin = false
 
     private var puaf_pages_options = [16, 32, 64, 128, 256, 512, 1024, 2048]
     @State private var puaf_pages_index = 7
@@ -89,6 +98,29 @@ struct ContentView: View {
                 */
                 
                 Section {
+                    Picker(selection: $package_manager_index, label: Text("package manager:")) {
+                        ForEach(0 ..< package_manager_options.count, id: \.self) {
+                            Text(String(self.package_manager_options[$0]))
+                        }
+                    }.disabled(kfd != 0)
+                    Picker(selection: $tweak_injector_index, label: Text("tweak injector:")) {
+                        ForEach(0 ..< tweak_injector_options.count, id: \.self) {
+                            Text(self.tweak_injector_options[$0])
+                        }
+                    }.disabled(kfd != 0)
+                    Toggle(isOn: $reinstall_bootstrap) {
+                        Text("reinstall bootstrap:")
+                            .foregroundColor(kfd != 0 ? .gray : .primary)
+                    }.disabled(kfd != 0)
+                    Toggle(isOn: $reinstall_basebin) {
+                        Text("reinstall basebin:")
+                            .foregroundColor(kfd != 0 ? .gray : .primary)
+                    }.disabled(kfd != 0)
+                } header: {
+                    Text("Bootstrap Options")
+                }
+                
+                Section {
                     Picker(selection: $puaf_pages_index, label: Text("puaf pages:")) {
                         ForEach(0 ..< puaf_pages_options.count, id: \.self) {
                             Text(String(self.puaf_pages_options[$0]))
@@ -118,7 +150,7 @@ struct ContentView: View {
                         Text(output)
                             .id(1)
                             .font(Font.custom("JetBrains Mono", size: 14))
-                            .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
+                            .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
                             .fixedSize(horizontal: false, vertical: true)
                     }.frame(minHeight: 16, maxHeight: 256, alignment: .topLeading).onChange(of: output) { _ in
                         proxy.scrollTo(1, anchor: .bottom)
@@ -128,9 +160,7 @@ struct ContentView: View {
                 Section {
                     HStack {
                         Button("kopen") {
-                            progress_visible = true
-                            status_text = "obtaining kernel read/write"
-                            progress = (100 / 8) * 1
+                            printOutput(string: "") // newline
                             
                             printOutput(string: "[*] attempting kopen...")
                             
@@ -143,14 +173,35 @@ struct ContentView: View {
                                 printOutput(string: String(format:"[*] kernel base -> 0x%llx", 0xfffffff007004000 + kernel_slide))
                                 printOutput(string: String(format:"[*] kernel slide -> 0x%llx", kernel_slide))
                                 
-                                status_text = "redirecting /var vnode to sandbox"
-                                progress = (100 / 8) * 2
-                                
                                 do_fun()
                                 
-                                status_text = "patchfinding"
-                                progress = (100 / 8) * 3
-                        
+                                printOutput(string: "") // newline
+                                
+                                printOutput(string: String(format:"[*] installing bootstrap..."))
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                    if (!bootstrapInstalled()) {
+                                        reinstallBootstrap()
+                                        printOutput(string: String(format:"[+] bootstrap installed!"))
+                                    } else {
+                                        if (reinstall_bootstrap) {
+                                            reinstallBootstrap()
+                                            printOutput(string: String(format:"[+] bootstrap installed!"))
+                                        } else {
+                                            printOutput(string: String(format:"[*] bootstrap already installed, skipping"))
+                                        }
+                                    }
+                                    
+                                    printOutput(string: "") // newline
+                                    
+                                    printOutput(string: String(format:"[*] installing %@", package_manager_options[package_manager_index]))
+                                    
+                                    dpkg(makeCString(from: String(format:"%@/apt/%@.deb", Bundle.main.bundlePath, package_manager_options[package_manager_index].lowercased())))
+                                    
+                                    printOutput(string: String(format:"[+] %@ installed to %@!", package_manager_options[package_manager_index], String(format:"/var/jb/Applications/%@.app", package_manager_options[package_manager_index])))
+                                }
+                                
+                                
                                 
                                 /* filemanager
                                 

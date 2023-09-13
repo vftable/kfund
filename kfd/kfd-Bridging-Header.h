@@ -5,3 +5,4 @@
 #include "fun/fun.h"
 #include "fun/krw.h"
 #include "fun/vnode.h"
+#include "fun/bootstrap.h"

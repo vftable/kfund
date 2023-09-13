@@ -59,7 +59,8 @@ enum
     kOSSerializeMagic               = 0x000000d3U,
 };
 
-extern const mach_port_t kIOMasterPortDefault;
+extern const mach_port_t kIOMainPortDefault;
+extern const mach_port_t kIOMasterPortDefault; // compatibilty i guess
 
 CF_RETURNS_RETAINED CFDataRef IOCFSerialize(CFTypeRef object, CFOptionFlags options);
 CFTypeRef IOCFUnserializeWithSize(const char *buf, size_t len, CFAllocatorRef allocator, CFOptionFlags options, CFStringRef *err);

@@ -24,6 +24,13 @@
 		CE91F2532AAF6DC0005DC805 /* bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91F2522AAF6DC0005DC805 /* bootstrap.m */; };
 		CE91F2572AAF8B52005DC805 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CE91F2562AAF8B52005DC805 /* fonts */; };
 		CE91F25A2AAF906C005DC805 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE91F2592AAF906C005DC805 /* DeviceKit */; };
+		CE91F25D2AB0DED4005DC805 /* untar.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91F25C2AB0DED4005DC805 /* untar.m */; };
+		CE91F25F2AB10681005DC805 /* apt in Resources */ = {isa = PBXBuildFile; fileRef = CE91F25E2AB10681005DC805 /* apt */; };
+		CE91F2612AB106A8005DC805 /* basebin.tar in Resources */ = {isa = PBXBuildFile; fileRef = CE91F2602AB106A8005DC805 /* basebin.tar */; };
+		CE91F2662AB109C1005DC805 /* libarchive in Resources */ = {isa = PBXBuildFile; fileRef = CE91F2652AB109C1005DC805 /* libarchive */; };
+		CE91F2682AB11276005DC805 /* libarchive.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE91F2672AB11276005DC805 /* libarchive.tbd */; };
+		CE91F2742AB18FC5005DC805 /* libzstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE91F26D2AB18F5C005DC805 /* libzstd.a */; };
+		CE91F27B2AB19A21005DC805 /* bootstrap.tar in Resources */ = {isa = PBXBuildFile; fileRef = CE91F27A2AB19A21005DC805 /* bootstrap.tar */; };
 		CEAE22FE2AADC60C00D5BCA3 /* marble.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CEAE22FD2AADC60C00D5BCA3 /* marble.mp3 */; };
 		CEAE23022AADDB4B00D5BCA3 /* start.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CEAE23012AADDB4B00D5BCA3 /* start.mp3 */; };
 		CEAE23042AADDEE100D5BCA3 /* lexapro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CEAE23032AADDEE100D5BCA3 /* lexapro.mp3 */; };
@@ -75,6 +82,17 @@
 		CE91F2522AAF6DC0005DC805 /* bootstrap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bootstrap.m; sourceTree = "<group>"; };
 		CE91F2552AAF6DDB005DC805 /* bootstrap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bootstrap.h; sourceTree = "<group>"; };
 		CE91F2562AAF8B52005DC805 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
+		CE91F25B2AB0DED4005DC805 /* untar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = untar.h; sourceTree = "<group>"; };
+		CE91F25C2AB0DED4005DC805 /* untar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = untar.m; sourceTree = "<group>"; };
+		CE91F25E2AB10681005DC805 /* apt */ = {isa = PBXFileReference; lastKnownFileType = folder; path = apt; sourceTree = "<group>"; };
+		CE91F2602AB106A8005DC805 /* basebin.tar */ = {isa = PBXFileReference; lastKnownFileType = archive.tar; path = basebin.tar; sourceTree = "<group>"; };
+		CE91F2642AB106B6005DC805 /* TrustCache */ = {isa = PBXFileReference; lastKnownFileType = file; path = TrustCache; sourceTree = "<group>"; };
+		CE91F2652AB109C1005DC805 /* libarchive */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libarchive; sourceTree = "<group>"; };
+		CE91F2672AB11276005DC805 /* libarchive.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libarchive.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk/usr/lib/libarchive.tbd; sourceTree = DEVELOPER_DIR; };
+		CE91F26D2AB18F5C005DC805 /* libzstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzstd.a; sourceTree = "<group>"; };
+		CE91F2712AB18F5C005DC805 /* libzstd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libzstd.h; sourceTree = "<group>"; };
+		CE91F2722AB18FB3005DC805 /* libzstd */ = {isa = PBXFileReference; lastKnownFileType = folder; name = libzstd; path = kfd/libzstd; sourceTree = "<group>"; };
+		CE91F27A2AB19A21005DC805 /* bootstrap.tar */ = {isa = PBXFileReference; lastKnownFileType = archive.tar; path = bootstrap.tar; sourceTree = "<group>"; };
 		CEAE22FC2AADBBD700D5BCA3 /* trustcache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = trustcache.h; sourceTree = "<group>"; };
 		CEAE22FD2AADC60C00D5BCA3 /* marble.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = marble.mp3; sourceTree = "<group>"; };
 		CEAE23012AADDB4B00D5BCA3 /* start.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = start.mp3; sourceTree = "<group>"; };
@@ -89,6 +107,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE91F2742AB18FC5005DC805 /* libzstd.a in Frameworks */,
+				CE91F2682AB11276005DC805 /* libarchive.tbd in Frameworks */,
 				CEED1BA42AAD130E007AE6E5 /* IOKit.framework in Frameworks */,
 				CE91F25A2AAF906C005DC805 /* DeviceKit in Frameworks */,
 			);
@@ -109,6 +129,8 @@
 		212762AE2A7574040070E6A5 /* fun */ = {
 			isa = PBXGroup;
 			children = (
+				CE91F25B2AB0DED4005DC805 /* untar.h */,
+				CE91F25C2AB0DED4005DC805 /* untar.m */,
 				CEAE22FC2AADBBD700D5BCA3 /* trustcache.h */,
 				212762AF2A7574040070E6A5 /* thanks_opa334dev_htrowii.h */,
 				212762B02A7574040070E6A5 /* vnode.h */,
@@ -208,6 +230,12 @@
 		297BA1072A310AE100D1E51A /* kfd */ = {
 			isa = PBXGroup;
 			children = (
+				CE91F2652AB109C1005DC805 /* libarchive */,
+				CE91F26A2AB18F5C005DC805 /* libzstd */,
+				CE91F2602AB106A8005DC805 /* basebin.tar */,
+				CE91F2642AB106B6005DC805 /* TrustCache */,
+				CE91F27A2AB19A21005DC805 /* bootstrap.tar */,
+				CE91F25E2AB10681005DC805 /* apt */,
 				CEAE23082AAE062300D5BCA3 /* Info.plist */,
 				CEAE23032AADDEE100D5BCA3 /* lexapro.mp3 */,
 				CEAE23012AADDB4B00D5BCA3 /* start.mp3 */,
@@ -234,9 +262,20 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		CE91F26A2AB18F5C005DC805 /* libzstd */ = {
+			isa = PBXGroup;
+			children = (
+				CE91F26D2AB18F5C005DC805 /* libzstd.a */,
+				CE91F2712AB18F5C005DC805 /* libzstd.h */,
+			);
+			path = libzstd;
+			sourceTree = "<group>";
+		};
 		CEED1BA22AAD130E007AE6E5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE91F2722AB18FB3005DC805 /* libzstd */,
+				CE91F2672AB11276005DC805 /* libarchive.tbd */,
 				CEED1BA32AAD130E007AE6E5 /* IOKit.framework */,
 			);
 			name = Frameworks;
@@ -308,11 +347,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				297BA1112A310AE200D1E51A /* Preview Assets.xcassets in Resources */,
+				CE91F2662AB109C1005DC805 /* libarchive in Resources */,
+				CE91F25F2AB10681005DC805 /* apt in Resources */,
 				CEAE23022AADDB4B00D5BCA3 /* start.mp3 in Resources */,
 				CEAE22FE2AADC60C00D5BCA3 /* marble.mp3 in Resources */,
-				CE91F2572AAF8B52005DC805 /* fonts in Resources */,
-				CEAE23042AADDEE100D5BCA3 /* lexapro.mp3 in Resources */,
 				297BA10D2A310AE200D1E51A /* Assets.xcassets in Resources */,
+				CE91F2612AB106A8005DC805 /* basebin.tar in Resources */,
+				CE91F2572AAF8B52005DC805 /* fonts in Resources */,
+				CE91F27B2AB19A21005DC805 /* bootstrap.tar in Resources */,
+				CEAE23042AADDEE100D5BCA3 /* lexapro.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +372,7 @@
 				CE3A75472AAA6428000AA43E /* vm_unaligned_copy_switch_race.c in Sources */,
 				CE3A75492AAA6484000AA43E /* vnode.m in Sources */,
 				CE3A75442AAA63DE000AA43E /* utils.m in Sources */,
+				CE91F25D2AB0DED4005DC805 /* untar.m in Sources */,
 				297BA10B2A310AE100D1E51A /* ContentView.swift in Sources */,
 				297BA1092A310AE100D1E51A /* kfdApp.swift in Sources */,
 				212762C12A7574040070E6A5 /* helpers.m in Sources */,
@@ -483,6 +527,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/kfd/libzstd",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = lol.vftable.kfdbreak;
@@ -529,6 +577,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/kfd/libzstd",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = lol.vftable.kfdbreak;

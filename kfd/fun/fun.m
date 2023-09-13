@@ -22,6 +22,7 @@
 #include "grant_full_disk_access.h"
 #include "thanks_opa334dev_htrowii.h"
 #include "IOKit.h"
+#include "bootstrap.h"
 
 
 int funUcred(uint64_t proc) {
@@ -186,6 +187,26 @@ uint64_t getChildVnode(uint64_t vnode, char* childname) {
     return target_vnode;
 }
 
+uint64_t getVnodePrivate(void) {
+    
+    //path: /private/var/mobile/Library/Preferences/.GlobalPreferences.plist
+    //5 upward, /private
+    const char* path = "/private/var/mobile/Library/Preferences/.GlobalPreferences.plist";
+    
+    uint64_t vnode = getVnodeAtPath(path);
+    if(vnode == -1) {
+        printf("[-] Unable to get vnode, path: %s\n", path);
+        return -1;
+    }
+
+    uint64_t parent_vnode = vnode;
+    for(int i = 0; i < 4; i++) {
+        parent_vnode = kread64(parent_vnode + off_vnode_v_parent) | 0xffffff8000000000;
+    }
+
+    return parent_vnode;
+}
+
 int do_fun(void) {
     
     _offsets_init();
@@ -221,10 +242,20 @@ int do_fun(void) {
      
      */
     
+    NSLog(@"[i] /private vnode: 0x%llx", getVnodePrivate());
+    NSLog(@"[i] boot manifest hash: %s", getBootManifestHash());
+    
     uint64_t target_vnode = getVnodeAtPathByChdir("/var/mobile");
     char* target_mount = mountVnode(target_vnode, "/var/mobile");
     
     NSLog(@"[i] directory listing of /var/mobile: %@", [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[NSString stringWithUTF8String:target_mount] error:NULL]);
+    
+    /*
+    if (!bootstrapInstalled()) {
+        prepareBootstrap();
+        extractBootstrap();
+    }
+     */
     
     // VarMobileWriteTest();
     

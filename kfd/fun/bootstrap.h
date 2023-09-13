@@ -10,8 +10,12 @@
 
 #include "stdbool.h"
 
+char* getBootManifestHash(void);
 bool bootstrapInstalled(void);
+void reinstallBootstrap(void);
 void prepareBootstrap(void);
+void extractBootstrap(void);
+void dpkg(char* pathName);
 char* mountVarJbUnsandboxed(void);
 
 #endif /* bootstrap_h */
