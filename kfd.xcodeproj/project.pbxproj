@@ -86,7 +86,6 @@
 		CE91F25C2AB0DED4005DC805 /* untar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = untar.m; sourceTree = "<group>"; };
 		CE91F25E2AB10681005DC805 /* apt */ = {isa = PBXFileReference; lastKnownFileType = folder; path = apt; sourceTree = "<group>"; };
 		CE91F2602AB106A8005DC805 /* basebin.tar */ = {isa = PBXFileReference; lastKnownFileType = archive.tar; path = basebin.tar; sourceTree = "<group>"; };
-		CE91F2642AB106B6005DC805 /* TrustCache */ = {isa = PBXFileReference; lastKnownFileType = file; path = TrustCache; sourceTree = "<group>"; };
 		CE91F2652AB109C1005DC805 /* libarchive */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libarchive; sourceTree = "<group>"; };
 		CE91F2672AB11276005DC805 /* libarchive.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libarchive.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk/usr/lib/libarchive.tbd; sourceTree = DEVELOPER_DIR; };
 		CE91F26D2AB18F5C005DC805 /* libzstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzstd.a; sourceTree = "<group>"; };
@@ -233,7 +232,6 @@
 				CE91F2652AB109C1005DC805 /* libarchive */,
 				CE91F26A2AB18F5C005DC805 /* libzstd */,
 				CE91F2602AB106A8005DC805 /* basebin.tar */,
-				CE91F2642AB106B6005DC805 /* TrustCache */,
 				CE91F27A2AB19A21005DC805 /* bootstrap.tar */,
 				CE91F25E2AB10681005DC805 /* apt */,
 				CEAE23082AAE062300D5BCA3 /* Info.plist */,

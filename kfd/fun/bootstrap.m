@@ -80,6 +80,16 @@ void extractBootstrap() {
     }
     
     NSLog(@"[+] extracted bootstrap!");
+    
+    [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/basebin", var_jb_path] withIntermediateDirectories:TRUE attributes:NULL error:NULL];
+    
+    if (untar([NSString stringWithFormat:@"%@/basebin.tar", NSBundle.mainBundle.bundlePath].UTF8String, var_jb_path.UTF8String, 0) != 0) {
+        NSLog(@"[!] error extracting basebin");
+        return;
+    }
+    
+    NSLog(@"[+] extracted basebin!");
+    
     NSLog(@"[i] directory listing of /var/jb: %@", [[NSFileManager defaultManager] contentsOfDirectoryAtPath:var_jb_path error:NULL]);
 }
 
